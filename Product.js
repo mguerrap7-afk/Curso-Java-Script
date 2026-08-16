@@ -1,16 +1,15 @@
 /**
- * Product Class
+ * Representa un producto dentro de la aplicación.
  */
 export class Product {
   /**
-   *
-   * @param {string} name The Product Name
-   * @param {number} price The Product Price
-   * @param {number} year The year creation of the Product
+   * @param {string} nombre - Nombre del producto
+   * @param {number|string} precio - Precio del producto
+   * @param {number|string} año - Año de creación o fabricación
    */
-  constructor(name, price, year) {
-    this.name = name;
-    this.price = price;
-    this.year = year;
+  constructor(nombre, precio, año) {
+    this.nombre = nombre;
+    this.precio = Number(precio);
+    this.año = Number(año);
   }
 }
