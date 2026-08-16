@@ -1,38 +1,30 @@
-/**
- * User Interface Class
- */
 export class UI {
-  /**
-   * Add a New Product 
-   * @param {Object} product A new product Object
-   */
-  addProduct(product) {
+  addProduct(producto) {
     const productList = document.getElementById("product-list");
     const element = document.createElement("div");
+
     element.innerHTML = `
-            <div class="card text-center mb-4">
-                <div class="card-body">
-                    <strong>Producto</strong>: ${product.name} -
-                    <strong>Precio</strong>: ${product.price} - 
-                    <strong>Año</strong>: ${product.year}
-                    <a href="#" class="btn btn-danger" name="eliminar">Eliminar</a>
-                </div>
-            </div>
-        `;
+      <div class="card text-center mb-4">
+        <div class="card-body">
+          <strong>Producto</strong>: ${producto.nombre} -
+          <strong>Precio</strong>: ${producto.precio} -
+          <strong>Año</strong>: ${producto.año}
+          <a href="#" class="btn btn-danger" data-action="delete">Delete</a>
+        </div>
+      </div>
+    `;
+
     productList.appendChild(element);
   }
 
-  /**
-   * Reset Form Values
-   */
   resetForm() {
     document.getElementById("product-form").reset();
   }
 
-  eliminarProduct(element) {
-    if (element.name === "eliminar") {
-      element.parentElement.parentElement.remove();
-      this.showMessage("Producto eliminado con exito", "info");
+  deleteProduct(element) {
+    if (element.dataset.action === "delete") {
+      element.closest(".card").remove();
+      this.showMessage("Producto eliminado exitosamente", "success");
     }
   }
 
@@ -41,15 +33,12 @@ export class UI {
     div.className = `alert alert-${cssClass} mt-2`;
     div.appendChild(document.createTextNode(message));
 
-    // Show in The DOM
     const container = document.querySelector(".container");
     const app = document.querySelector("#App");
 
-    // Insert Message in the UI
     container.insertBefore(div, app);
 
-    // Remove the Message after 3 seconds
-    setTimeout(function () {
+    setTimeout(() => {
       document.querySelector(".alert").remove();
     }, 3000);
   }
