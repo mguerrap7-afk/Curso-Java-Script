@@ -5,33 +5,34 @@ import { UI } from "./UI.js";
 document
   .getElementById("product-form")
   .addEventListener("submit", function (e) {
-    // Override the default Form behaviour
     e.preventDefault();
 
     // Getting Form Values
-    const name = document.getElementById("name").value,
-      price = document.getElementById("price").value,
-      year = document.getElementById("year").value;
+    const nombre = document.getElementById("nombre").value,
+      precio = document.getElementById("precio").value,
+      año = document.getElementById("año").value;
 
-    // Create a new Oject Product
-    const product = new Product(name, price, year);
+    // Create a new Product Object
+    const producto = new Product(nombre, precio, año);
 
     // Create a new UI instance
     const ui = new UI();
 
     // Input User Validation
-    if (name === "" || price === "" || year === "") {
-      ui.showMessage("Por favor rellena los campos que se le solicitan", "danger");
+    if (nombre === "" || precio === "" || año === "") {
+      ui.showMessage("Please Insert data in all fields", "danger");
+      return; // Detiene la ejecución
     }
 
     // Save Product
-    ui.addProduct(product);
-    ui.showMessage("Producto añadido correctamente", "success");
+    ui.addProduct(producto);
+    ui.showMessage("Producto añadido exitosamente", "success");
     ui.resetForm();
   });
 
+// Delete Product
 document.getElementById("product-list").addEventListener("click", (e) => {
   const ui = new UI();
-  ui.eliminarProduct(e.target);
+  ui.deleteProduct(e.target);
   e.preventDefault();
 });
